@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'Data/FormCard.css'%}">
+{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 col-md-10">
+                <form class="card" method="POST" action="">
+                    {% csrf_token %}
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="form_tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#position" role="tab" aria-controls="description" aria-selected="true"><i class="fas fa-book"></i> General </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"  href="#photometry" role="tab" aria-controls="photometry" aria-selected="false"><i class="fas fa-wave-square"></i> Photometry</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"  href="#astrometry" role="tab" aria-controls="astrometry" aria-selected="false"><i class="fas fa-satellite-dish"></i> Astrometry</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"  href="#other_programs" role="tab" aria-controls="other_programs" aria-selected="false"><i class="fas fa-laptop"></i> Other Programs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"  href="#follow-up" role="tab" aria-controls="follow-up" aria-selected="false"><i class="fas fa-info-circle"></i> Follow Up Data</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#notes" role="tab" aria-controls="notes" aria-selected="false"><i class="far fa-file-alt"></i> Notes</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content mt-3">
+                            <div class="tab-pane active" id="position" role="general" aria-labelledby="general-tab">
+                                {{form.RaDEC.label}}
+                                {{form.RaDEC}}
+                                {{form.RA.label}}
+                                {{form.RA}}
+                                {{form.DEC.label}}
+                                {{form.DEC}}
+                                {{form.FoundInSearch.label}}
+                                {{form.FoundInSearch}}
+                                {{form.AddDate.label}}
+                                {{form.AddDate}}
+                            </div>
+                            <div class="tab-pane" id="photometry" role="tabpanel" aria-labelledby="photometry-tab">
+                                {{form.w1mpro.label}}
+                                {{form.w1mpro}}
+                                {{form.w1sigmpro.label}}
+                                {{form.w1sigmpro}}  
+                                {{form.w1snr_pm.label}}
+                                {{form.w1snr_pm}}
+                                {{form.w2mpro.label}}
+                                {{form.w2mpro}}
+                                {{form.w2sigmpro.label}}
+                                {{form.w2sigmpro}}
+                                {{form.w2snr_pm.label}}
+                                {{form.w2snr_pm}}
+                            </div>
+                            
+                            <div class="tab-pane" id="notes" role="tabpanel" aria-labelledby="notes-tab">
+                                {{form.Note.label}}
+                                {{form.Note}}
+                            </div>
+                            
+                            <div class="tab-pane" id="astrometry" role="tabpanel" aria-labelledby="astrometry-tab">
+                                {{form.PMRA.label}}
+                                {{form.PMRA}}
+                                {{form.sigPMRA.label}}
+                                {{form.sigPMRA}}
+                                {{form.PMDec.label}}
+                                {{form.PMDec}}
+                                {{form.sigPMDec.label}}
+                                {{form.sigPMDec}}
+                                {{form.GaiaDR2plx.label}}
+                                {{form.GaiaDR2plx}}
+                                {{form.GaiaDR2PlxErr.label}}
+                                {{form.GaiaDR2PlxErr}}
+                                {{form.SIMBAD.label}}
+                                {{form.SIMBAD}}
+                            </div>
+
+                            <div class="tab-pane" id="other_programs" role="tabpanel" aria-labelledby="other_programs-tab">
+                                {{form.BYW.label}}
+                                {{form.BYW}}
+                                {{form.GaiaCoMover.label}}
+                                {{form.GaiaCoMover}}
+                                {{form.OnSpitzerPrg.label}}
+                                {{form.OnSpitzerPrg}}
+                            </div>
+
+                            <div class="tab-pane" id="follow-up" role="tabpanel" aria-labelledby="follow-up-tab">
+                                {{form.JMag.label}}
+                                {{form.JMag}}
+                                {{form.JMagErr.label}}
+                                {{form.JMagErr}}
+                                {{form.JMagSrc.label}}
+                                {{form.JMagSrc}}
+                                {{form.CatWISESpec.label}}
+                                {{form.CatWISESpec}}
+                                {{form.CatWISESpecSrc.label}}
+                                {{form.CatWISESpecSrc}}
+                                {{form.SpizerConsider.label}}
+                                {{form.SpizerConsider}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-center">
+                        <button class="btn btn-primary" type="submit" id="check">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+<script src="{% static 'Data/FormCard.js'%}"></script>
+{% endblock %}

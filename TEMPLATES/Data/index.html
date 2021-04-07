@@ -1,0 +1,486 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row mb-3 d-flex justify-content-center">
+        <div class="col-12 col-md-10">
+            <form class="card" method="GET">
+                <h5 class="card-header">
+                    <a data-toggle="collapse" href="#collapse-example" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-inline align-self-center">
+                        <i class="fa fa-chevron-down pull-right"></i>
+                        Applied Filters
+                    </a>
+                    <a class="btn btn-primary text-white float-right mx-2" href="{% url 'Data:csv' %}?{{request.GET.urlencode}}">
+                        <i class="fas fa-file-csv"></i> 
+                        Export CSV
+                    </a>
+                </h5>
+                <div id="collapse-example" class="collapse show" aria-labelledby="heading-example">
+                    <ul class="nav nav-tabs card-body-tabs" id="form_tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#position" role="tab" aria-controls="description" aria-selected="true"><i class="fas fa-book"></i> General </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="#photometry" role="tab" aria-controls="photometry" aria-selected="false"><i class="fas fa-wave-square"></i> Photometry</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="#astrometry" role="tab" aria-controls="astrometry" aria-selected="false"><i class="fas fa-satellite-dish"></i> Astrometry</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="#other_programs" role="tab" aria-controls="other_programs" aria-selected="false"><i class="fas fa-laptop"></i> Other Programs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="#follow-up" role="tab" aria-controls="follow-up" aria-selected="false"><i class="fas fa-info-circle"></i> Follow Up Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="#calculation" role="tab" aria-controls="calculation" aria-selected="false"><i class="fas fa-calculator"></i> Calculated Data</a>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="tab-content text-center justify-content-left">
+                            <div class="tab-pane active" id="position" role="general" aria-labelledby="general-tab">
+                                <div class="row">
+                                    <div class="col-6">
+                                        {{Filter.form.RA_lte.label}}
+                                        {{Filter.form.RA_lte}}
+                                    </div>
+                                    <div class="col-6">
+                                        {{Filter.form.RA_gte.label}}
+                                        {{Filter.form.RA_gte}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        {{Filter.form.DEC_lte.label}}
+                                        {{Filter.form.DEC_lte}}
+                                    </div>
+                                    <div class="col-6">
+                                        {{Filter.form.DEC_gte.label}}
+                                        {{Filter.form.DEC_gte}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        {{Filter.form.FoundInSearch.label}}
+                                        {{Filter.form.FoundInSearch}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="photometry" role="tabpanel" aria-labelledby="photometry-tab">
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.w1mpro_lte.label}}
+                                        {{Filter.form.w1mpro_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.w1mpro_gte.label}}
+                                        {{Filter.form.w1mpro_gte}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.w1sigmpro_lte.label}}
+                                        {{Filter.form.w1sigmpro_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.w1sigmpro_gte.label}}
+                                        {{Filter.form.w1sigmpro_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.w1sigmpro_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.w1snr_pm_lte.label}}
+                                        {{Filter.form.w1snr_pm_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.w1snr_pm_gte.label}}
+                                        {{Filter.form.w1snr_pm_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.w1snr_pm_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.w2mpro_lte.label}}
+                                        {{Filter.form.w2mpro_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.w2mpro_gte.label}}
+                                        {{Filter.form.w2mpro_gte}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.w2sigmpro_lte.label}}
+                                        {{Filter.form.w2sigmpro_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.w2sigmpro_gte.label}}
+                                        {{Filter.form.w2sigmpro_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.w2sigmpro_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.w2snr_pm_lte.label}}
+                                        {{Filter.form.w2snr_pm_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.w2snr_pm_gte.label}}
+                                        {{Filter.form.w2snr_pm_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.w2snr_pm_null}}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-pane" id="astrometry" role="tabpanel" aria-labelledby="astrometry-tab">
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.PMRA_lte.label}}
+                                        {{Filter.form.PMRA_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.PMRA_gte.label}}
+                                        {{Filter.form.PMRA_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.PMRA_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.sigPMRA_lte.label}}
+                                        {{Filter.form.sigPMRA_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.sigPMRA_gte.label}}
+                                        {{Filter.form.sigPMRA_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.sigPMRA_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.PMDec_lte.label}}
+                                        {{Filter.form.PMDec_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.PMDec_gte.label}}
+                                        {{Filter.form.PMDec_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.PMDec_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.sigPMDec_lte.label}}
+                                        {{Filter.form.sigPMDec_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.sigPMDec_gte.label}}
+                                        {{Filter.form.sigPMDec_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.sigPMDec_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.GaiaDR2plx_lte.label}}
+                                        {{Filter.form.GaiaDR2plx_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.GaiaDR2plx_gte.label}}
+                                        {{Filter.form.GaiaDR2plx_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.GaiaDR2plx_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.GaiaDR2PlxErr_lte.label}}
+                                        {{Filter.form.GaiaDR2PlxErr_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.GaiaDR2PlxErr_gte.label}}
+                                        {{Filter.form.GaiaDR2PlxErr_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.GaiaDR2PlxErr_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        {{Filter.form.SIMBAD.label}}
+                                        {{Filter.form.SIMBAD}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="other_programs" role="tabpanel" aria-labelledby="other_programs-tab">
+                                <div class="row">
+                                    <div class="col-10">
+                                        {{Filter.form.GaiaCoMover.label}}
+                                        {{Filter.form.GaiaCoMover}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.GaiaCoMover_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-10">
+                                        {{Filter.form.BYW.label}}
+                                        {{Filter.form.BYW}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.BYW_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-10">
+                                        {{Filter.form.OnSpitzerPrg.label}}
+                                        {{Filter.form.OnSpitzerPrg}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.OnSpitzerPrg_null}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="follow-up" role="tabpanel" aria-labelledby="follow-up-tab">
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.JMag_lte.label}}
+                                        {{Filter.form.JMag_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.JMag_gte.label}}
+                                        {{Filter.form.JMag_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.JMag_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.JMagErr_lte.label}}
+                                        {{Filter.form.JMagErr_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.JMagErr_gte.label}}
+                                        {{Filter.form.JMagErr_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.JMagErr_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-10">
+                                        {{Filter.form.SpizerConsider.label}}
+                                        {{Filter.form.SpizerConsider}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.SpizerConsider_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-10">
+                                        {{Filter.form.CatWISESpec.label}}
+                                        {{Filter.form.CatWISESpec}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.CatWISESpec_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-10">
+                                        {{Filter.form.CatWISESpecSrc.label}}
+                                        {{Filter.form.CatWISESpecSrc}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.CatWISESpecSrc_null}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="calculation" role="tabpanel" aria-labelledby="calculation-tab">
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.VTan_lte.label}}
+                                        {{Filter.form.VTan_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.VTan_gte.label}}
+                                        {{Filter.form.VTan_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.VTan_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.JW2Diff_lte.label}}
+                                        {{Filter.form.JW2Diff_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.JW2Diff_gte.label}}
+                                        {{Filter.form.JW2Diff_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.JW2Diff_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.JW2DiffErr_lte.label}}
+                                        {{Filter.form.JW2DiffErr_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.JW2DiffErr_gte.label}}
+                                        {{Filter.form.JW2DiffErr_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.JW2DiffErr_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.W1W2Diff_lte.label}}
+                                        {{Filter.form.W1W2Diff_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.W1W2Diff_gte.label}}
+                                        {{Filter.form.W1W2Diff_gte}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.W1W2DiffErr_lte.label}}
+                                        {{Filter.form.W1W2DiffErr_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.W1W2DiffErr_gte.label}}
+                                        {{Filter.form.W1W2DiffErr_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.W1W2DiffErr_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.TotalPM_lte.label}}
+                                        {{Filter.form.TotalPM_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.TotalPM_gte.label}}
+                                        {{Filter.form.TotalPM_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.TotalPM_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.TotalPMErr_lte.label}}
+                                        {{Filter.form.TotalPMErr_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.TotalPMErr_gte.label}}
+                                        {{Filter.form.TotalPMErr_gte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.TotalPMErr_null}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        {{Filter.form.H_W2_lte.label}}
+                                        {{Filter.form.H_W2_lte}}
+                                    </div>
+                                    <div class="col-5">
+                                        {{Filter.form.H_W2_lte.label}}
+                                        {{Filter.form.H_W2_lte}}
+                                    </div>
+                                    <div class="col-2">
+                                        Is Null
+                                        {{Filter.form.H_W2_null}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-filter"></i>
+                            Apply Filters
+                        </button>
+                        <a class="btn btn-danger text-white float-right mx-2" href="{% url 'Data:index' %}">
+                            <i class="fas fa-undo"></i>
+                            Reset Filters
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row mb-3">
+        {% for WiseObject in WiseObjects %}
+        <a href="{% url 'Data:view_data' id=WiseObject.id %}" class="col-6 col-md-4 col-lg-3 col-xl-2 my-2" style="text-decoration: none;color: inherit;">
+            <div class="card text-center">
+                <div class="card-header">
+                  WiseObject: #{{WiseObject.id}}
+                </div>
+                <div class="card-body">
+                    <span class="d-block"><strong>RA: </strong>{{WiseObject.RA}}</span>
+                    <span class="d-block"><strong>DEC: </strong>{{WiseObject.DEC}}</span>
+                    <span class="d-block"><strong>Found In: </strong>{{WiseObject.FoundInSearch}}</span>
+                    <span class="d-block"><strong>W1-W2: </strong>{{WiseObject.W1W2Diff}}</span>
+                    <span class="d-block"><strong>w2mpro: </strong>{{WiseObject.w2mpro}}</span>
+                </div>
+                <div class="card-footer text-muted">
+                    <span class="d-block"><strong>Added: </strong>{{WiseObject.created_at|date:"Y-m-d"}}</span>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="{% static 'Data/FormCard.js'%}"></script>
+{% endblock %}

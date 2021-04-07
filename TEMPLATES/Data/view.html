@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-10">
+            <div class="card">
+                {% csrf_token %}
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" id="form_tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#position" role="tab" aria-controls="description" aria-selected="true"><i class="fas fa-book"></i> General </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="#photometry" role="tab" aria-controls="photometry" aria-selected="false"><i class="fas fa-wave-square"></i> Photometry</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="#astrometry" role="tab" aria-controls="astrometry" aria-selected="false"><i class="fas fa-satellite-dish"></i> Astrometry</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="#other_programs" role="tab" aria-controls="other_programs" aria-selected="false"><i class="fas fa-laptop"></i> Other Programs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="#follow-up" role="tab" aria-controls="follow-up" aria-selected="false"><i class="fas fa-info-circle"></i> Follow Up Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#calculations" role="tab" aria-controls="calculations" aria-selected="false"><i class="fas fa-calculator"></i> Calculations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#notes" role="tab" aria-controls="notes" aria-selected="false"><i class="far fa-file-alt"></i> Notes</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="position" role="general" aria-labelledby="general-tab">
+                            <span class="d-block"><strong>RA/Dec: </strong>{{WiseObject.RaDEC}}</span>
+                            <span class="d-block"><strong>RA: </strong>{{WiseObject.RA}}</span>
+                            <span class="d-block"><strong>DEC: </strong>{{WiseObject.DEC}}</span>
+                            <span class="d-block"><strong>Found In Search: </strong>{{WiseObject.FoundInSearch}}</span>
+                            <span class="d-block"><strong>Add Date: </strong>{{WiseObject.AddDate}}</span>
+                            <span class="d-block"><strong>Object Created On Server: </strong>{{WiseObject.created_at}}</span>
+                        </div>
+                        <div class="tab-pane" id="photometry" role="tabpanel" aria-labelledby="photometry-tab">
+                            <span class="d-block"><strong>w1mpro: </strong>{{WiseObject.w1mpro}}</span>
+                            <span class="d-block"><strong>w1sigmpro: </strong>{{WiseObject.w1sigmpro}}</span>
+                            <span class="d-block"><strong>w1snr_pm: </strong>{{WiseObject.w1snr_pm}}</span>
+                            <span class="d-block"><strong>w2mpro: </strong>{{WiseObject.w2mpro}}</span>
+                            <span class="d-block"><strong>w2sigmpro: </strong>{{WiseObject.w2sigmpro}}</span>
+                            <span class="d-block"><strong>w2snr_pm: </strong>{{WiseObject.w2snr_pm}}</span>
+                        </div>
+                        
+                        <div class="tab-pane" id="astrometry" role="tabpanel" aria-labelledby="astrometry-tab">
+                            <span class="d-block"><strong>PMRA: </strong>{{WiseObject.PMRA}}</span>
+                            <span class="d-block"><strong>sigPMRA: </strong>{{WiseObject.sigPMRA}}</span>
+                            <span class="d-block"><strong>PMDec: </strong>{{WiseObject.PMDec}}</span>
+                            <span class="d-block"><strong>sigPMDec: </strong>{{WiseObject.sigPMDec}}</span>
+                            <span class="d-block"><strong>GaiaDR2plx: </strong>{{WiseObject.GaiaDR2plx}}</span>
+                            <span class="d-block"><strong>GaiaDR2PlxErr: </strong>{{WiseObject.GaiaDR2PlxErr}}</span>
+                            <span class="d-block"><strong>SIMBAD: </strong>{{WiseObject.SIMBAD}}</span>
+                        </div>
+
+                        <div class="tab-pane" id="other_programs" role="tabpanel" aria-labelledby="other_programs-tab">
+                            <span class="d-block"><strong>BYW: </strong>{{WiseObject.BYW}}</span>
+                            <span class="d-block"><strong>GaiaCoMover: </strong>{{WiseObject.GaiaCoMover}}</span>
+                            <span class="d-block"><strong>OnSpitzerPrg: </strong>{{WiseObject.OnSpitzerPrg}}</span>
+                        </div>
+
+                        <div class="tab-pane" id="calculations" role="tabpanel" aria-labelledby="calculations-tab">
+                            <span class="d-block"><strong>VTan: </strong>{{WiseObject.VTan}}</span>
+                            <span class="d-block"><strong>JW2Diff: </strong>{{WiseObject.JW2Diff}}</span>
+                            <span class="d-block"><strong>JW2DiffErr: </strong>{{WiseObject.JW2DiffErr}}</span>
+                            <span class="d-block"><strong>W1W2Diff: </strong>{{WiseObject.W1W2Diff}}</span>
+                            <span class="d-block"><strong>W1W2DiffErr: </strong>{{WiseObject.W1W2DiffErr}}</span>
+                            <span class="d-block"><strong>TotalPM: </strong>{{WiseObject.TotalPM}}</span>
+                            <span class="d-block"><strong>TotalPMErr: </strong>{{WiseObject.TotalPMErr}}</span>
+                            <span class="d-block"><strong>H_W2: </strong>{{WiseObject.H_W2}}</span>
+                        </div>
+
+                        <div class="tab-pane" id="follow-up" role="tabpanel" aria-labelledby="follow-up-tab">
+                            <span class="d-block"><strong>JMag: </strong>{{WiseObject.JMag}}</span>
+                            <span class="d-block"><strong>JMagErr: </strong>{{WiseObject.JMagErr}}</span>
+                            <span class="d-block"><strong>JMagSrc: </strong>{{WiseObject.JMagSrc}}</span>
+                            <span class="d-block"><strong>CatWISESpec: </strong>{{WiseObject.CatWISESpec}}</span>
+                            <span class="d-block"><strong>CatWISESpecSrc: </strong>{{WiseObject.CatWISESpecSrc}}</span>
+                            <span class="d-block"><strong>SpizerConsider: </strong>{{WiseObject.SpizerConsider}}</span>
+                        </div>
+
+                        <div class="tab-pane" id="notes" role="tabpanel" aria-labelledby="notes-tab">
+                            <textarea disabled class="form-control" id="exampleFormControlTextarea1">{{WiseObject.Note}}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-center">
+                    <a href="{{WiseObject.WiseURL}}" target="_blank" class="btn btn-primary text-white mx-2" id="check">Wise Website</a>
+                    {% if request.user.is_staff %}
+                    <a href="{% url 'Data:edit_data' id=WiseObject.id %}" class="btn btn-warning mx-2">Edit Object</a>
+                    <button class="btn btn-danger text-white mx-2" data-toggle="modal" data-target="#exampleModal">Delete Object</button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <form method="POST" action="{% url 'Data:delete_data' id=WiseObject.id %}" class="modal fade" id="exampleModal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {% csrf_token %}
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete WiseObject: #{{WiseObject.pk}}?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body text-center">
+              <h4>Please type in the RA/Dec to Confirm</h4>
+              <h4><strong>{{WiseObject.RaDEC}}</strong></h4>
+              <input data-correctval="{{WiseObject.RaDEC}}" class="form-control" id="delete-check">
+            </div>
+            <div class="modal-footer justify-content-center">
+              <button disabled type="submit" class="btn btn-danger" id="delete-button">Confirm Delete</button>
+            </div>
+          </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+{% block js %}
+<script src="{% static 'Data/FormCard.js'%}"></script>
+<script src="{% static 'Data/DeleteConfirm.js'%}"></script>
+{% endblock %}
