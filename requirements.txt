@@ -1,0 +1,7 @@
+django
+six
+django-import-export
+django-filter
+django-queryset-csv
+django-heroku
+gunicorn
