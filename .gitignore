@@ -1,5 +1,6 @@
 # APP SSH Keys
 *.pem
+*.key
 # VSCode Config
 .vscode/launch.json
 # Byte-compiled / optimized / DLL files
