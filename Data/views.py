@@ -39,7 +39,9 @@ def add_data(request):
     if request.method == "POST":
         form = CatWiseForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            CATWISE = form.save(commit=False)
+            CATWISE.last_modified = request.user
+            CATWISE.save()
             return redirect('Data:index')
         else:
             context = {
@@ -58,7 +60,9 @@ def edit_data(request,id):
     if request.method == "POST":
         form = CatWiseForm(data=request.POST,instance=CatWise.objects.get(id=id))
         if form.is_valid():
-            form.save()
+            CATWISE = form.save(commit=False)
+            CATWISE.last_modified = request.user
+            CATWISE.save()
             return redirect('Data:index')
         else:
             context = {

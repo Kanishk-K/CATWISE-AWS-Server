@@ -42,6 +42,7 @@
                             <span class="d-block"><strong>Found In Search: </strong>{{WiseObject.FoundInSearch}}</span>
                             <span class="d-block"><strong>Add Date: </strong>{{WiseObject.AddDate}}</span>
                             <span class="d-block"><strong>Object Created On Server: </strong>{{WiseObject.created_at}}</span>
+                            <span class="d-block"><strong>Modified Last By: </strong>{% if WiseObject.last_modified and WiseObject.last_modified_date %}{{WiseObject.last_modified.username}} on {{WiseObject.last_modified_date}}{% endif %}</span>
                         </div>
                         <div class="tab-pane" id="photometry" role="tabpanel" aria-labelledby="photometry-tab">
                             <span class="d-block"><strong>w1mpro: </strong>{{WiseObject.w1mpro}}</span>
