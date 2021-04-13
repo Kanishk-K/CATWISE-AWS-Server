@@ -9,6 +9,8 @@ from .forms import CatWiseForm
 from .models import CatWise
 from .filters import CatWiseFilter
 from django.contrib import messages
+import sys
+sys.setdefaultencoding('utf8')
 
 
 # Create your views here.
