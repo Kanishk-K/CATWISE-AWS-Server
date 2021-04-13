@@ -9,7 +9,6 @@ from .forms import CatWiseForm
 from .models import CatWise
 from .filters import CatWiseFilter
 from django.contrib import messages
-from .resources import CatWiseResource
 
 
 # Create your views here.
@@ -26,10 +25,7 @@ def index(request):
 def render_csv(request):
     WiseFilter = CatWiseFilter(request.GET,queryset=CatWise.objects.all())
     WiseObjects = WiseFilter.qs
-    dataExport = CatWiseResource.export(WiseObjects)
-    response = HttpResponse(dataExport.csv,content_type="text/csv")
-    response['Content-Disposition'] = 'attachment; filename="CatWise_Data.csv"'
-    return response
+    return render_to_csv_response(WiseObjects,filename="CatWise_Data")
 
 @login_required
 def view_data(request,id):
