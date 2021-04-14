@@ -5,6 +5,7 @@ from . import views
 app_name = 'Data'
 urlpatterns = [
     path('', views.index, name='index'),
+    path('<int:page>/',views.page_index,name="page_index"),
     path('CSV/',views.render_csv,name="csv"),
     path('NewEntry/',views.add_data,name='add_data'),
     path('ViewEntry/<int:id>/',views.view_data,name="view_data"),

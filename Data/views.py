@@ -14,10 +14,20 @@ from django.contrib import messages
 # Create your views here.
 @login_required
 def index(request):
+    return redirect('Data:page_index', page=1)
+
+@login_required
+def page_index(request,page):
     WiseFilter = CatWiseFilter(request.GET,queryset=CatWise.objects.all())
+    QuerySet = WiseFilter.qs
     context = {
         "Filter":WiseFilter,
-        "WiseObjects": WiseFilter.qs.order_by('RA')[0:50]
+        "WiseObjects":QuerySet.order_by('RA')[50*(page-1):(50*(page-1))+50],
+        "TotalFound":len(QuerySet),
+        "PagesBefore":[i for i in range(page-5,len(QuerySet)//50 + 2) if i > 0 and i<page],
+        "CurrentPage":page,
+        "PagesAfter": [i for i in range(page,page+6) if i < len(QuerySet)//50 + 2 and i>page],
+        "MaxPage":len(QuerySet)//50 + 1,
     }
     return render(request,"Data/index.html",context=context)
 
