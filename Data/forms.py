@@ -7,7 +7,6 @@ class CatWiseForm(ModelForm):
     class Meta:
         model = CatWise
         fields = [
-            'RaDEC',
             'RA',
             'DEC',
             'FoundInSearch',

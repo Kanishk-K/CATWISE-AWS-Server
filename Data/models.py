@@ -5,7 +5,7 @@ import decimal
 
 # Create your models here.
 class CatWise(models.Model):
-    RaDEC = models.CharField(max_length=50)
+    RaDEC = models.CharField(max_length=50,blank = True)
     RA = models.DecimalField(max_digits=15,decimal_places=9)
     DEC = models.DecimalField(max_digits=15,decimal_places=9)
     FoundInSearch = models.CharField(max_length=100)
@@ -58,6 +58,10 @@ class CatWise(models.Model):
 
     # How to calculate other fields given values
     def save(self,*args,**kwargs):
+        if self.DEC < 0:
+            self.RaDEC = "%02d" % int(self.RA//15) + " " + "%02d" % int((self.RA/15)%1 * 60) + " " + str(round(((self.RA/15)%1 * 60)%1 * 60,2)) + "/-" + "%02d" % int(abs(self.DEC)) + " " + "%02d" % int(abs(self.DEC)%1 * 60) + " " + str(round((abs(self.DEC)%1 * 60)%1 * 60,1))
+        else:
+            self.RaDEC = "%02d" % int(self.RA//15) + " " + "%02d" % int((self.RA/15)%1 * 60) + " " + str(round(((self.RA/15)%1 * 60)%1 * 60,2)) + "/" + "%02d" % int(abs(self.DEC)) + " " + "%02d" % int(abs(self.DEC)%1 * 60) + " " + str(round((abs(self.DEC)%1 * 60)%1 * 60,1))
         if self.PMRA and self.PMDec and self.GaiaDR2plx:
             self.VTan = decimal.Decimal(4.74) * decimal.Decimal(math.sqrt((self.PMRA**2) + (self.PMDec**2))) / (self.GaiaDR2plx/1000)
         if self.JMag:
