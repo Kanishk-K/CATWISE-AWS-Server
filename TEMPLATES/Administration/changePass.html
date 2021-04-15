@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static%}
+{% block css %}
+<link rel="stylesheet" href="{% static 'Administration/login.css'%}">
+{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+          <div class="card card-signin flex-row my-5 bg-dark">
+            <div class="card-img-left d-none d-md-flex">
+               <!-- Background image for card set in CSS! -->
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-center text-white"><i class="fas fa-user-lock"></i> Change Password</h5>
+                <form class="form-signin" method="POST" action="">
+                    {% csrf_token %}
+                    <div class="form-label-group">
+                        {{form.new_password1}}
+                        <p class="text-white text-center text-md-left" for="inputUserame">New Password</p>
+                        {{ form.new_password1.errors }}
+                    </div>
+
+                    <div class="form-label-group">
+                        {{form.new_password2}}
+                        <p class="text-white text-center text-md-left" for="inputEmail">Confirm New Password</p>
+                        {{ form.new_password2.errors }}
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Confirm</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+{% block js %}
+{% endblock %}

@@ -3,7 +3,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm
+from .forms import LoginForm, ChangePasswordForm
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 
@@ -46,6 +46,27 @@ def login_request(request):
             return render(request,'Administration/login.html',context=context)
     else:
         return redirect('Administration:index')
+
+@login_required
+def password_change_request(request):
+    if request.method == "POST":
+        form = ChangePasswordForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('Data:index')
+        else:
+            context = {
+                    'form':form,
+                    'signup':False
+                }
+            messages.warning(request, 'Your new password was invalid', extra_tags=['danger',"fas fa-user-times"])
+            return render(request,'Administration/changePass.html',context=context)
+    else:
+        context = {
+            'form':ChangePasswordForm(user=request.user),
+            'signup':False
+        }
+        return render(request,'Administration/changePass.html',context=context)
 
 def logout_request(request):
     logout(request)

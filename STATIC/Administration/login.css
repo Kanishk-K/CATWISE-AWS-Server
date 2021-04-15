@@ -44,3 +44,6 @@
   height: auto;
   border-radius: 2rem;
 }
+.errorlist li{
+  color: white;
+} 

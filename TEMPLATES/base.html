@@ -80,6 +80,12 @@
                 <ul class="navbar-nav ml-auto">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Administration:changepass'%}">
+                            <i class="fas fa-key"></i>
+                            Change Password
+                        </a>
+                    </li>
+                    <li class="nav-item">
                             <a class="nav-link" href="{% url 'Administration:logout'%}">
                                 <i class="fas fa-sign-out-alt">
                                 </i>
