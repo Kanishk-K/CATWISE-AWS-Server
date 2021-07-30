@@ -1,0 +1,9 @@
+tr:hover {
+    background-color: #eaebec;
+}
+.pagination{
+    justify-content: start !important;
+}
+table{
+    white-space: nowrap;
+}

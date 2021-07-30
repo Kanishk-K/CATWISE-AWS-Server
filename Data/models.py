@@ -16,10 +16,10 @@ class CatWise(models.Model):
 
     w1mpro = models.DecimalField(max_digits=11,decimal_places=6)
     w1sigmpro = models.DecimalField(max_digits=11,decimal_places=6,blank=True,null=True)
-    w1snr_pm = models.DecimalField(max_digits=11,decimal_places=6,blank=True,null=True)
+    w1snr_pm = models.DecimalField(max_digits=11,decimal_places=6,blank=True,null=True,verbose_name="w1snrpm")
     w2mpro = models.DecimalField(max_digits=11,decimal_places=6)
     w2sigmpro = models.DecimalField(max_digits=11,decimal_places=6,blank=True,null=True)
-    w2snr_pm = models.DecimalField(max_digits=11,decimal_places=6,blank=True,null=True)
+    w2snr_pm = models.DecimalField(max_digits=11,decimal_places=6,blank=True,null=True,verbose_name="w2snrpm")
 
     PMRA = models.DecimalField(max_digits=11,decimal_places=6,blank=True,null=True)
     sigPMRA = models.DecimalField(max_digits=11,decimal_places=6,blank=True,null=True)
@@ -47,7 +47,7 @@ class CatWise(models.Model):
     W1W2DiffErr = models.DecimalField(max_digits=11,decimal_places=6,blank=True,null=True)
     TotalPM = models.DecimalField(max_digits=11,decimal_places=6,blank=True,null=True)
     TotalPMErr = models.DecimalField(max_digits=11,decimal_places=6,blank=True,null=True)
-    H_W2 = models.DecimalField(max_digits=11,decimal_places=6,blank=True,null=True)
+    H_W2 = models.DecimalField(max_digits=11,decimal_places=6,blank=True,null=True,verbose_name="HW2")
     WiseURL = models.URLField(blank=True)
     
     Note = models.TextField(blank=True,null=True)

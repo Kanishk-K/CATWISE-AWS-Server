@@ -3,6 +3,7 @@ six
 django-import-export
 django-filter
 django-queryset-csv
+django-tables2
 django-heroku
 gunicorn
 wheel

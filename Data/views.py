@@ -8,26 +8,23 @@ from djqscsv.djqscsv import render_to_csv_response
 from .forms import CatWiseForm
 from .models import CatWise
 from .filters import CatWiseFilter
+from .tables import CatWiseTable
 from django.contrib import messages
 
 
 # Create your views here.
-@login_required
-def index(request):
-    return redirect('Data:page_index', page=1)
 
 @login_required
-def page_index(request,page):
+def index(request):
     WiseFilter = CatWiseFilter(request.GET,queryset=CatWise.objects.all())
     QuerySet = WiseFilter.qs
+    table = CatWiseTable(QuerySet)
+    table.order_by = request.GET.get("sort","")
+    table.paginate(page=request.GET.get("page", 1),per_page=50)
     context = {
         "Filter":WiseFilter,
-        "WiseObjects":QuerySet.order_by('RA')[50*(page-1):(50*(page-1))+50],
+        "table":table,
         "TotalFound":len(QuerySet),
-        "PagesBefore":[i for i in range(page-5,len(QuerySet)//50 + 2) if i > 0 and i<page],
-        "CurrentPage":page,
-        "PagesAfter": [i for i in range(page,page+6) if i < len(QuerySet)//50 + 2 and i>page],
-        "MaxPage":len(QuerySet)//50 + 1,
     }
     return render(request,"Data/index.html",context=context)
 

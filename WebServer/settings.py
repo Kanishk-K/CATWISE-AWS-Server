@@ -44,9 +44,11 @@ INSTALLED_APPS = [
 
     'django_filters',
     'import_export',
+    'django_tables2'
 ]
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
+DJANGO_TABLES2_TEMPLATE = os.path.join(BASE_DIR, "TEMPLATES","Tables","Table.html")
 
 
 MIDDLEWARE = [
