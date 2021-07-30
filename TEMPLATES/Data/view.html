@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-center">
-                    <a href="{{WiseObject.WiseURL}}" target="_blank" class="btn btn-primary text-white mx-2" id="check">Wise Website</a>
+                    <a href="{{WiseObject.WiseURL}}" target="_blank" class="btn btn-primary text-white mx-2" id="check">Wise View</a>
                     {% if request.user.is_staff %}
                     <a href="{% url 'Data:edit_data' id=WiseObject.id %}" class="btn btn-warning mx-2">Edit Object</a>
                     <button class="btn btn-danger text-white mx-2" data-toggle="modal" data-target="#exampleModal">Delete Object</button>
